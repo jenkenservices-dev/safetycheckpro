@@ -241,6 +241,26 @@
             box-shadow: 0 6px 20px rgba(76, 175, 80, 0.35);
         }
 
+        .nav-login-btn {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.625rem 1.5rem;
+            border-radius: 500px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(0, 61, 107, 0.25);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 61, 107, 0.35);
+        }
+
         /* Hero Section */
         .hero {
             padding-top: 100px;
@@ -1491,7 +1511,12 @@
                 <a href="faq.html" class="nav-link">FAQ</a>
                 <a href="pricing.html" class="nav-link">Pricing</a>
                 <a href="contact_support.html" class="nav-link">Contact</a>
-                <a href="login.html" class="nav-link">Login</a>
+                <a href="login.html" class="nav-login-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                    Login
+                </a>
                 <a href="signup.html" class="nav-cta">Get Started →</a>
             </div>
             
