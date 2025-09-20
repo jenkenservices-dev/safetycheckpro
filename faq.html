@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions - SafetyCheck Pro™</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #003d6b;
+            --green: #4CAF50;
+            --orange: #FF9800;
+            --red: #f44336;
+            --gradient-primary: linear-gradient(135deg, #003d6b 0%, #00264d 100%);
+            --gradient-green: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+            --gray-600: #475569;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--gradient-primary);
+            padding: 2rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .radar-logo {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+
+        .radar-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--white);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: radarPulse 3s ease-out infinite;
+        }
+
+        .radar-ring:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .radar-ring:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .radar-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            background: var(--white);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes radarPulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .logo-text {
+            font-family: 'Sora', sans-serif;
+            font-weight: 800;
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--white);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .hero-section {
+            background: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Sora', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 500px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-600);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .category-tab {
+            padding: 0.75rem 1.5rem;
+            background: var(--white);
+            border: 2px solid #e0e0e0;
+            border-radius: 500px;
+            font-weight: 600;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-tab.active {
+            background: var(--gradient-green);
+            color: var(--white);
+            border-color: var(--green);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        .faq-section {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+            color: var(--navy);
+            margin-bottom: 2rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--green);
+        }
+
+        .faq-card {
+            background: var(--white);
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 20px rgba(0, 61, 107, 0.08);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 61, 107, 0.15);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+
+        .faq-card.active .faq-question {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.05) 0%, rgba(102, 187, 106, 0.02) 100%);
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: var(--navy);
+            font-size: 1.05rem;
+            flex: 1;
+            padding-right: 1rem;
+        }
+
+        .toggle-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--gradient-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-card.active .toggle-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-card.active .faq-answer {
+            max-height: 500px;
+            padding: 0 1.5rem 1.5rem 1.5rem;
+        }
+
+        .answer-content {
+            color: var(--gray-600);
+            line-height: 1.8;
+        }
+
+        .answer-content ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .answer-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-section {
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin-top: 4rem;
+            color: var(--white);
+        }
+
+        .cta-section h2 {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 500px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+        }
+
+        .btn-white {
+            background: var(--white);
+            color: var(--navy);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer {
+            background: var(--gradient-primary);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .category-tabs {
+                gap: 0.5rem;
+            }
+
+            .category-tab {
+                font-size: 0.9rem;
+                padding: 0.6rem 1.2rem;
+            }
+
+            .cta-section {
+                padding: 2rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="radar-logo">
+                    <div class="radar-ring"></div>
+                    <div class="radar-ring"></div>
+                    <div class="radar-ring"></div>
+                    <div class="radar-center"></div>
+                </div>
+                <span class="logo-text">SafetyCheck Pro™</span>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="login.html">Login</a>
+                <a href="signup.html">Sign Up</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero-section">
+        <h1>Frequently Asked Questions</h1>
+        <p class="hero-subtitle">Get answers to common questions about SafetyCheck Pro™ fleet compliance monitoring</p>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for answers...">
+                <span class="search-icon">🔍</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="category-tabs">
+            <div class="category-tab active" data-category="all">All Questions</div>
+            <div class="category-tab" data-category="getting-started">Getting Started</div>
+            <div class="category-tab" data-category="pricing">Pricing & Plans</div>
+            <div class="category-tab" data-category="features">Features</div>
+            <div class="category-tab" data-category="technical">Technical</div>
+            <div class="category-tab" data-category="alerts">Alerts & Monitoring</div>
+        </div>
+
+        <!-- Getting Started Section -->
+        <div class="faq-section" data-category="getting-started">
+            <h2 class="category-title">Getting Started</h2>
+            
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span class="question-text">What is SafetyCheck Pro™?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="answer-content">
+                        SafetyCheck Pro™ is an automated DOT compliance monitoring platform that tracks your fleet's roadside inspections and violations in real-time. We monitor public FMCSA data daily and send you instant alerts when new inspections or violations are recorded, helping you stay on top of compliance without constantly checking the FMCSA portal.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span class="question-text">Do I need to provide my FMCSA login credentials?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="answer-content">
+                        No! SafetyCheck Pro™ never requires your FMCSA portal login credentials. We access only publicly available data from FMCSA databases to monitor your fleet. Your login credentials remain completely secure and private.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span class="question-text">How quickly can I get started?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="answer-content">
+                        You can be up and running in less than 5 minutes! Simply:
+                        <ul>
+                            <li>Sign up with your basic information</li>
+                            <li>Enter your DOT number</li>
+                            <li>Configure your alert preferences</li>
+                            <li>Start receiving real-time violation alerts</li>
+                        </ul>
+                        No complex setup, no contracts, and no waiting periods.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing & Plans Section -->
+        <div class="faq-section" data-category="pricing">
+            <h2 class="category-title">Pricing & Plans</h2>
+            
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span class="question-text">Is SafetyCheck Pro™ really free for small fleets?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="answer-content">
+                        Yes! Fleets with 50 or fewer drivers get full access to SafetyCheck Pro™ absolutely FREE. No hidden fees, no credit card required, no time limits. This includes all monitoring features, alerts, and reports.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span class="question-text">What if my fleet grows beyond 50 drivers?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="answer-content">
+                        When your fleet grows beyond 50 drivers, you'll be upgraded to our paid plan. We'll notify you in advance and provide flexible options. Our paid plans are competitively priced with no long-term contracts required. You can always scale up or down based on your fleet size.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span class="question-text">Are there any setup fees or contracts?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="answer-content">
+                        No setup fees and no contracts! SafetyCheck Pro™ operates on a month-to-month basis for paid plans. You can cancel anytime without penalties. We believe in earning your business through value, not locking you into contracts.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="faq-section" data-category="features">
+            <h2 class="category-title">Features</h2>
+            
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span class="question-text">What types of violations do you monitor?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="answer-content">
+                        We monitor all DOT violations recorded in FMCSA databases, including:
+                        <ul>
+                            <li>Hours of Service violations</li>
+                            <li>Vehicle maintenance issues</li>
+                            <li>Driver qualification violations</li>
+                            <li>Hazmat violations</li>
+                            <li>Drug and alcohol violations</li>
+                            <li>All roadside inspection levels (I-VI)</li>
+                        </ul>
+                        You can customize which violations trigger immediate alerts.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span class="question-text">Can I track my CSA scores?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="answer-content">
+                        Yes! SafetyCheck Pro™ provides comprehensive CSA BASIC score tracking across all seven categories. You can view current scores, track trends over time, and receive alerts when scores change. Our dashboard makes it easy to identify areas needing improvement.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span class="question-text">Do you provide compliance reports?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="answer-content">
+                        Yes, we offer comprehensive compliance reports that include violation summaries, CSA score analysis, inspection history, and trend analysis. Reports can be generated on-demand or scheduled for regular delivery. Perfect for safety meetings, insurance renewals, or regulatory audits.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Section -->
+        <div class="faq-section" data-category="technical">
+            <h2 class="category-title">Technical Questions</h2>
+            
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span class="question-text">How often do you check for new violations?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="answer-content">
+                        We monitor FMCSA databases continuously throughout the day. Our system checks for new inspections and violations every 15-30 minutes during business hours. As soon as a new violation is detected for your fleet, you'll receive an alert based on your notification preferences.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span class="question-text">Is my fleet data secure?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="answer-content">
+                        Absolutely. We use industry-standard encryption for all data transmission and storage. Your information is protected with SSL/TLS encryption, secure servers, and regular security audits. We never share your data with third parties for marketing purposes. See our Privacy Policy for full details.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span class="question-text">What browsers and devices are supported?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="answer-content">
+                        SafetyCheck Pro™ works on all modern browsers including Chrome, Firefox, Safari, and Edge. Our platform is fully responsive and works on desktops, laptops, tablets, and smartphones. SMS alerts work on any phone that can receive text messages.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alerts & Monitoring Section -->
+        <div class="faq-section" data-category="alerts">
+            <h2 class="category-title">Alerts & Monitoring</h2>
+            
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span class="question-text">How do I receive violation alerts?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="answer-content">
+                        You can receive alerts via:
+                        <ul>
+                            <li>SMS text messages to multiple phone numbers</li>
+                            <li>Email notifications to multiple addresses</li>
+                            <li>Dashboard notifications when logged in</li>
+                            <li>Mobile push notifications (coming soon)</li>
+                        </ul>
+                        Configure your preferences to receive alerts for specific violation types, severity levels, or drivers.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span class="question-text">Can multiple people receive alerts?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="answer-content">
+                        Yes! You can add unlimited users to your account with different roles and alert preferences. Set up alerts for safety managers, dispatchers, drivers, or executives. Each user can customize their notification preferences independently.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-card">
+                <div class="faq-question">
+                    <span class="question-text">What if FMCSA data is delayed?</span>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="answer-content">
+                        While we check FMCSA databases frequently, the initial data entry by inspection officers can sometimes be delayed. Most inspections appear within 24-48 hours, but some may take longer. We alert you as soon as the data becomes available in the FMCSA system.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Still Have Questions?</h2>
+            <p>Our support team is here to help you get the most out of SafetyCheck Pro™</p>
+            <a href="mailto:support@safetycheckpro.com" class="btn btn-white">Contact Support</a>
+            <a href="signup.html" class="btn btn-white">Start Free Trial</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="legal/privacy.html">Privacy Policy</a>
+            <a href="legal/terms.html">Terms of Service</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <p>&copy; 2025 SafetyCheck Pro™ - Powered by Jenken Safety Services</p>
+    </footer>
+
+    <script>
+        // FAQ Accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const card = question.parentElement;
+                const wasActive = card.classList.contains('active');
+                
+                // Close all other cards in the same section
+                const section = card.parentElement;
+                section.querySelectorAll('.faq-card').forEach(otherCard => {
+                    otherCard.classList.remove('active');
+                });
+                
+                // Toggle current card
+                if (!wasActive) {
+                    card.classList.add('active');
+                }
+            });
+        });
+
+        // Category filter functionality
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const faqSections = document.querySelectorAll('.faq-section');
+
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const category = tab.dataset.category;
+                
+                // Update active tab
+                categoryTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show/hide sections
+                faqSections.forEach(section => {
+                    if (category === 'all' || section.dataset.category === category) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const allCards = document.querySelectorAll('.faq-card');
+            const allSections = document.querySelectorAll('.faq-section');
+            
+            if (searchTerm === '') {
+                // Reset to show all
+                allCards.forEach(card => card.style.display = 'block');
+                allSections.forEach(section => section.style.display = 'block');
+                return;
+            }
+            
+            // Hide all sections initially
+            allSections.forEach(section => section.style.display = 'none');
+            
+            // Search through cards
+            allCards.forEach(card => {
+                const question = card.querySelector('.question-text').textContent.toLowerCase();
+                const answer = card.querySelector('.answer-content').textContent.toLowerCase();
+                
+                if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    card.parentElement.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Update category tabs to show all
+            categoryTabs.forEach(tab => tab.classList.remove('active'));
+            document.querySelector('[data-category="all"]').classList.add('active');
+        });
+    </script>
+</body>
+</html>
