@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SafetyCheck Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #003d6b;
+            --navy-dark: #001f3d;
+            --green: #4CAF50;
+            --green-light: #6FCF73;
+            --green-dark: #388E3C;
+            --orange: #FF9800;
+            --red: #f44336;
+            --gray-900: #0f172a;
+            --gray-800: #1e293b;
+            --gray-700: #334155;
+            --gray-600: #475569;
+            --gray-500: #64748b;
+            --gray-400: #94a3b8;
+            --gray-300: #cbd5e1;
+            --gray-200: #e2e8f0;
+            --gray-100: #f1f5f9;
+            --gray-50: #f8fafc;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #003d6b 0%, #00264d 100%);
+            --gradient-green: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+            --gradient-mesh: radial-gradient(at 40% 20%, hsla(208, 100%, 20%, 0.3) 0px, transparent 50%),
+                            radial-gradient(at 80% 0%, hsla(142, 50%, 50%, 0.2) 0px, transparent 50%),
+                            radial-gradient(at 0% 50%, hsla(208, 100%, 30%, 0.2) 0px, transparent 50%),
+                            radial-gradient(at 80% 50%, hsla(142, 50%, 40%, 0.15) 0px, transparent 50%),
+                            radial-gradient(at 0% 100%, hsla(208, 100%, 20%, 0.2) 0px, transparent 50%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gradient-mesh), var(--gray-50);
+            color: var(--gray-900);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Animation */
+        .bg-animation {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            opacity: 0.3;
+            animation: floatMesh 20s ease-in-out infinite;
+        }
+
+        @keyframes floatMesh {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-50px, -50px) rotate(120deg); }
+            66% { transform: translate(50px, -100px) rotate(240deg); }
+        }
+
+        /* Login Container */
+        .login-container {
+            width: 100%;
+            max-width: 480px;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Logo Section */
+        .logo-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-wrapper {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-mark {
+            position: relative;
+            width: 60px;
+            height: 60px;
+        }
+
+        .radar-ring {
+            position: absolute;
+            border: 2px solid var(--green);
+            border-radius: 50%;
+            opacity: 0;
+            animation: radarPulse 3s infinite;
+        }
+
+        .radar-ring:nth-child(1) {
+            width: 100%;
+            height: 100%;
+            animation-delay: 0s;
+        }
+
+        .radar-ring:nth-child(2) {
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            animation-delay: 0.5s;
+        }
+
+        .radar-ring:nth-child(3) {
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+            animation-delay: 1s;
+        }
+
+        @keyframes radarPulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        .radar-center {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: var(--navy);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .logo-text {
+            font-family: 'Sora', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-safety {
+            color: var(--navy);
+        }
+
+        .logo-check {
+            color: var(--green);
+        }
+
+        .logo-pro {
+            color: var(--navy);
+        }
+
+        .tagline {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Login Card */
+        .login-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 61, 107, 0.15);
+            padding: 2.5rem;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-subtitle {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .form-input.error {
+            border-color: var(--red);
+        }
+
+        .error-message {
+            color: var(--red);
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Remember Me & Forgot Password */
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            cursor: pointer;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        .forgot-link {
+            color: var(--green);
+            font-size: 0.875rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-link:hover {
+            color: var(--green-dark);
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 500px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-green);
+            color: white;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--gray-700);
+            border: 1px solid var(--gray-200);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-50);
+            border-color: var(--gray-300);
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        .divider-text {
+            padding: 0 1rem;
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+
+        /* Sign Up Link */
+        .signup-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gray-100);
+            color: var(--gray-600);
+            font-size: 0.875rem;
+        }
+
+        .signup-link a {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .signup-link a:hover {
+            color: var(--green-dark);
+        }
+
+        /* Loading State */
+        .loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--gray-200);
+            border-top-color: var(--green);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Demo Notice */
+        .demo-notice {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            border-radius: 12px;
+            padding: 0.75rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .demo-notice-text {
+            font-size: 0.75rem;
+            color: var(--green-dark);
+            font-weight: 500;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 1rem;
+            }
+            
+            .login-card {
+                padding: 1.5rem;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .login-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <div class="login-container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <div class="logo-wrapper">
+                <div class="logo-mark">
+                    <div class="radar-ring"></div>
+                    <div class="radar-ring"></div>
+                    <div class="radar-ring"></div>
+                    <div class="radar-center"></div>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-safety">Safety</span><span class="logo-check">Check</span><span class="logo-pro">Pro</span>
+                </div>
+            </div>
+            <div class="tagline">Automated Roadside Inspection Monitoring</div>
+        </div>
+
+        <!-- Login Card -->
+        <div class="login-card">
+            <div class="login-header">
+                <h1 class="login-title">Welcome Back</h1>
+                <p class="login-subtitle">Sign in to access your dashboard</p>
+            </div>
+
+            <!-- Demo Notice -->
+            <div class="demo-notice">
+                <p class="demo-notice-text">Demo Mode: Use admin@safetycheckpro.com / demo123</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" id="email" placeholder="Enter your email" value="">
+                    <div class="error-message" id="emailError">Please enter a valid email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" id="password" placeholder="Enter your password" value="">
+                    <div class="error-message" id="passwordError">Password is required</div>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember">
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Sign In
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"/>
+                    </svg>
+                </button>
+
+                <div class="divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-text">or</div>
+                    <div class="divider-line"></div>
+                </div>
+
+                <button type="button" class="btn btn-secondary" onclick="handleSSOLogin()">
+                    Sign in with FMCSA Portal
+                </button>
+            </form>
+
+            <div class="signup-link">
+                Don't have an account? <a href="/signup.html">Start Free Trial</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form validation and submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset errors
+            document.querySelectorAll('.error-message').forEach(msg => msg.classList.remove('show'));
+            document.querySelectorAll('.form-input').forEach(input => input.classList.remove('error'));
+            
+            // Get values
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            let hasError = false;
+            
+            // Validate email
+            if (!email || !email.includes('@')) {
+                document.getElementById('email').classList.add('error');
+                document.getElementById('emailError').classList.add('show');
+                hasError = true;
+            }
+            
+            // Validate password
+            if (!password) {
+                document.getElementById('password').classList.add('error');
+                document.getElementById('passwordError').classList.add('show');
+                hasError = true;
+            }
+            
+            if (!hasError) {
+                // Check for demo credentials
+                if (email === 'admin@safetycheckpro.com' && password === 'demo123') {
+                    // Show success and redirect
+                    alert('Login successful! Redirecting to admin dashboard...');
+                    window.location.href = 'admin_dashboard_correct.html';
+                } else {
+                    // Show error for invalid credentials
+                    alert('Invalid email or password. Please use the demo credentials.');
+                    document.getElementById('email').value = 'admin@safetycheckpro.com';
+                    document.getElementById('password').value = '';
+                    document.getElementById('password').focus();
+                }
+            }
+        });
+
+        // Handle SSO login
+        function handleSSOLogin() {
+            alert('FMCSA Portal SSO integration coming soon. Please use email/password login for now.');
+        }
+
+        // Handle forgot password
+        document.querySelector('.forgot-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            if (email) {
+                alert(`Password reset instructions will be sent to ${email}`);
+            } else {
+                alert('Please enter your email address first.');
+                document.getElementById('email').focus();
+            }
+        });
+
+        // Auto-focus email field
+        document.getElementById('email').focus();
+    </script>
+</body>
+</html>

@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - SafetyCheck Pro Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #003d6b;
+            --navy-dark: #001f3d;
+            --green: #4CAF50;
+            --green-light: #6FCF73;
+            --green-dark: #388E3C;
+            --orange: #FF9800;
+            --red: #f44336;
+            --gray-900: #0f172a;
+            --gray-800: #1e293b;
+            --gray-700: #334155;
+            --gray-600: #475569;
+            --gray-500: #64748b;
+            --gray-400: #94a3b8;
+            --gray-300: #cbd5e1;
+            --gray-200: #e2e8f0;
+            --gray-100: #f1f5f9;
+            --gray-50: #f8fafc;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #003d6b 0%, #00264d 100%);
+            --gradient-green: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 61, 107, 0.08);
+            box-shadow: 0 4px 20px rgba(0, 61, 107, 0.08);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: none;
+        }
+
+        .logo-mark {
+            position: relative;
+            width: 45px;
+            height: 45px;
+        }
+
+        .radar-ring {
+            position: absolute;
+            border: 2px solid var(--green);
+            border-radius: 50%;
+            opacity: 0;
+            animation: radarPulse 3s infinite;
+        }
+
+        .radar-ring:nth-child(1) {
+            width: 100%;
+            height: 100%;
+            animation-delay: 0s;
+        }
+
+        .radar-ring:nth-child(2) {
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes radarPulse {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        .radar-center {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--navy);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .logo-main {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            color: var(--navy);
+        }
+
+        .logo-safety { color: var(--navy); }
+        .logo-check { color: var(--green); }
+        .logo-pro { color: var(--navy); }
+
+        .admin-badge {
+            background: var(--red);
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 500px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 1rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--navy);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--navy);
+            font-weight: 600;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--gray-600);
+            font-size: 1.125rem;
+        }
+
+        /* Settings Navigation */
+        .settings-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+        }
+
+        .settings-sidebar {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 61, 107, 0.1);
+            height: fit-content;
+        }
+
+        .settings-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            border-radius: 12px;
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 0.25rem;
+        }
+
+        .settings-nav-item:hover {
+            background: var(--gray-50);
+            color: var(--navy);
+        }
+
+        .settings-nav-item.active {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        /* Settings Sections */
+        .settings-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .settings-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 61, 107, 0.1);
+        }
+
+        .card-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .form-help {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            margin-top: 0.25rem;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .input-group .form-input {
+            flex: 1;
+        }
+
+        /* Toggle Switch */
+        .toggle-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .toggle-group:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-label {
+            flex: 1;
+        }
+
+        .toggle-title {
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 0.25rem;
+        }
+
+        .toggle-description {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gray-300);
+            transition: 0.4s;
+            border-radius: 500px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background: var(--green);
+        }
+
+        .toggle-switch input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 500px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-green);
+            color: white;
+            box-shadow: 0 4px 14px rgba(76, 175, 80, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.35);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--navy);
+            border: 1px solid var(--gray-200);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--navy);
+            background: var(--gray-50);
+        }
+
+        .btn-danger {
+            background: var(--red);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #d32f2f;
+        }
+
+        /* Status Indicators */
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: var(--gray-50);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .status-label {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .status-connected {
+            background: var(--green);
+        }
+
+        .status-error {
+            background: var(--red);
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            
+            .settings-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .settings-sidebar {
+                display: flex;
+                overflow-x: auto;
+                padding: 0.5rem;
+            }
+            
+            .settings-nav-item {
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="logo-container">
+                <div class="logo-mark">
+                    <div class="radar-ring"></div>
+                    <div class="radar-ring"></div>
+                    <div class="radar-ring"></div>
+                    <div class="radar-center"></div>
+                </div>
+                <div class="logo-main">
+                    <span class="logo-safety">Safety</span><span class="logo-check">Check</span><span class="logo-pro">Pro</span>
+                </div>
+                <span class="admin-badge">ADMIN</span>
+            </a>
+            
+            <div class="nav-menu">
+                <a href="admin_dashboard_correct.html" class="nav-link">Dashboard</a>
+                <a href="admin_users_correct.html" class="nav-link">Users</a>
+                <a href="admin_fleets_correct.html" class="nav-link">Fleets</a>
+                <a href="admin_sync_correct.html" class="nav-link">Sync Status</a>
+                <a href="admin_alerts_correct.html" class="nav-link">Alerts</a>
+                <a href="admin_api_correct.html" class="nav-link">API Logs</a>
+                <a href="admin_settings_correct.html" class="nav-link active">Settings</a>
+                <a href="/login.html" class="nav-link" style="margin-left: 2rem;">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">System Settings</h1>
+                <p class="page-subtitle">Configure system parameters and integrations</p>
+            </div>
+
+            <div class="settings-layout">
+                <!-- Settings Sidebar Navigation -->
+                <aside class="settings-sidebar">
+                    <a href="#api" class="settings-nav-item active">
+                        🔑 API Configuration
+                    </a>
+                    <a href="#sync" class="settings-nav-item">
+                        🔄 Sync Settings
+                    </a>
+                    <a href="#email" class="settings-nav-item">
+                        📧 Email Settings
+                    </a>
+                    <a href="#alerts" class="settings-nav-item">
+                        🔔 Alert Settings
+                    </a>
+                    <a href="#security" class="settings-nav-item">
+                        🔒 Security
+                    </a>
+                    <a href="#system" class="settings-nav-item">
+                        ⚙️ System
+                    </a>
+                </aside>
+
+                <!-- Settings Content -->
+                <div class="settings-content">
+                    <!-- API Configuration -->
+                    <div class="settings-card" id="api-section">
+                        <div class="card-header">
+                            <h2 class="card-title">API Configuration</h2>
+                            <p class="card-description">Manage FMCSA API credentials and connection settings</p>
+                        </div>
+
+                        <div class="status-row">
+                            <span class="status-label">FMCSA API Status</span>
+                            <div class="status-indicator">
+                                <span class="status-dot status-connected"></span>
+                                <span style="color: var(--green);">Connected</span>
+                            </div>
+                        </div>
+
+                        <div class="status-row">
+                            <span class="status-label">Last Test</span>
+                            <div class="status-indicator">
+                                <span>2 hours ago</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">FMCSA WebKey</label>
+                            <div class="input-group">
+                                <input type="password" class="form-input" value="••••••••••••••••••••" id="webkey">
+                                <button class="btn btn-secondary" onclick="toggleVisibility('webkey')">Show</button>
+                            </div>
+                            <p class="form-help">Your FMCSA Portal WebKey for API access</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">API Endpoint</label>
+                            <input type="text" class="form-input" value="https://mobile.fmcsa.dot.gov/qc/services">
+                            <p class="form-help">FMCSA API base URL</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Rate Limit</label>
+                            <select class="form-select">
+                                <option>1000 requests/hour (Default)</option>
+                                <option>500 requests/hour</option>
+                                <option>2000 requests/hour</option>
+                            </select>
+                        </div>
+
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button class="btn btn-secondary">Test Connection</button>
+                            <button class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </div>
+
+                    <!-- Sync Settings -->
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <h2 class="card-title">Sync Schedule</h2>
+                            <p class="card-description">Configure automated data synchronization schedules</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Daily Inspection Sync</label>
+                            <input type="time" class="form-input" value="06:00">
+                            <p class="form-help">Time to run daily inspection data sync (EST)</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Weekly CSA Update</label>
+                            <select class="form-select">
+                                <option>Saturday 2:00 AM EST</option>
+                                <option>Sunday 2:00 AM EST</option>
+                                <option>Friday 11:00 PM EST</option>
+                            </select>
+                            <p class="form-help">Weekly CSA score update schedule</p>
+                        </div>
+
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <div class="toggle-title">Enable Auto-Retry</div>
+                                <div class="toggle-description">Automatically retry failed syncs</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <div class="toggle-title">Priority Fleet Processing</div>
+                                <div class="toggle-description">Process enterprise fleets first</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <button class="btn btn-primary">Update Schedule</button>
+                    </div>
+
+                    <!-- Email Settings -->
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <h2 class="card-title">Email Configuration</h2>
+                            <p class="card-description">Configure email delivery settings</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">SMTP Server</label>
+                            <input type="text" class="form-input" value="smtp.sendgrid.net">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">SMTP Port</label>
+                            <input type="number" class="form-input" value="587">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">From Email</label>
+                            <input type="email" class="form-input" value="alerts@safetycheckpro.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">From Name</label>
+                            <input type="text" class="form-input" value="SafetyCheck Pro Alerts">
+                        </div>
+
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button class="btn btn-secondary">Send Test Email</button>
+                            <button class="btn btn-primary">Save Settings</button>
+                        </div>
+                    </div>
+
+                    <!-- Alert Settings -->
+                    <div class="settings-card">
+                        <div class="card-header">
+                            <h2 class="card-title">Alert Configuration</h2>
+                            <p class="card-description">Configure alert thresholds and delivery</p>
+                        </div>
+
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <div class="toggle-title">Out-of-Service Alerts</div>
+                                <div class="toggle-description">Send immediate alert for OOS violations</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <div class="toggle-title">CSA Threshold Alerts</div>
+                                <div class="toggle-description">Alert when CSA scores exceed thresholds</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <div class="toggle-title">Clean Inspection Notifications</div>
+                                <div class="toggle-description">Notify on clean inspections</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">CSA Alert Threshold (%)</label>
+                            <input type="number" class="form-input" value="75" min="0" max="100">
+                            <p class="form-help">Send alert when any BASIC score exceeds this percentage</p>
+                        </div>
+
+                        <button class="btn btn-primary">Update Alert Settings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        function toggleVisibility(fieldId) {
+            const field = document.getElementById(fieldId);
+            const button = event.target;
+            if (field.type === 'password') {
+                field.type = 'text';
+                field.value = 'your-actual-webkey-here';
+                button.textContent = 'Hide';
+            } else {
+                field.type = 'password';
+                field.value = '••••••••••••••••••••';
+                button.textContent = 'Show';
+            }
+        }
+
+        // Settings navigation
+        document.querySelectorAll('.settings-nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.settings-nav-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Save handlers
+        document.querySelectorAll('.btn-primary').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (!this.textContent.includes('Test')) {
+                    alert('Settings saved successfully!');
+                }
+            });
+        });
+
+        // Test handlers
+        document.querySelectorAll('.btn-secondary').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.textContent === 'Test Connection') {
+                    alert('Testing FMCSA API connection... Connection successful!');
+                } else if (this.textContent === 'Send Test Email') {
+                    const email = prompt('Enter email address for test:');
+                    if (email) alert(`Test email sent to ${email}`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
