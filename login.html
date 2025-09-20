@@ -416,6 +416,12 @@
             font-weight: 500;
         }
 
+        .demo-credentials {
+            font-size: 0.7rem;
+            color: var(--gray-600);
+            margin-top: 0.25rem;
+        }
+
         @media (max-width: 480px) {
             .login-container {
                 padding: 1rem;
@@ -464,7 +470,11 @@
 
             <!-- Demo Notice -->
             <div class="demo-notice">
-                <p class="demo-notice-text">Demo Mode: Use admin@safetycheckpro.com / demo123</p>
+                <p class="demo-notice-text">Demo Mode Active</p>
+                <p class="demo-credentials">
+                    Admin: admin@safetycheckpro.com / demo123<br>
+                    Client: client@safetycheckpro.com / demo123
+                </p>
             </div>
 
             <!-- Login Form -->
@@ -486,7 +496,7 @@
                         <input type="checkbox" id="remember">
                         Remember me
                     </label>
-                    <a href="#" class="forgot-link">Forgot password?</a>
+                    <a href="forgot_password.html" class="forgot-link">Forgot password?</a>
                 </div>
 
                 <button type="submit" class="btn btn-primary">
@@ -508,7 +518,7 @@
             </form>
 
             <div class="signup-link">
-                Don't have an account? <a href="/signup.html">Start Free Trial</a>
+                Don't have an account? <a href="signup.html">Start Free Trial</a>
             </div>
         </div>
     </div>
@@ -543,15 +553,27 @@
             }
             
             if (!hasError) {
-                // Check for demo credentials
+                // Check for admin credentials
                 if (email === 'admin@safetycheckpro.com' && password === 'demo123') {
-                    // Show success and redirect
-                    alert('Login successful! Redirecting to admin dashboard...');
+                    // Admin user - redirect to admin dashboard
+                    alert('Admin login successful! Redirecting to admin dashboard...');
                     window.location.href = 'admin_dashboard_correct.html';
-                } else {
-                    // Show error for invalid credentials
-                    alert('Invalid email or password. Please use the demo credentials.');
-                    document.getElementById('email').value = 'admin@safetycheckpro.com';
+                } 
+                // Check for client demo credentials
+                else if (email === 'client@safetycheckpro.com' && password === 'demo123') {
+                    // Client user - redirect to client dashboard
+                    alert('Login successful! Redirecting to your dashboard...');
+                    window.location.href = 'dashboard_updated.html';
+                }
+                // For any other email/password (simulating regular user)
+                else if (email && password && email.includes('@')) {
+                    // Default to client dashboard for other users
+                    alert('Login successful! Redirecting to your dashboard...');
+                    window.location.href = 'dashboard_updated.html';
+                }
+                else {
+                    // Invalid credentials
+                    alert('Invalid email or password. Please use the demo credentials shown above.');
                     document.getElementById('password').value = '';
                     document.getElementById('password').focus();
                 }
