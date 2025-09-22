@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Server Error - SafetyCheck Pro™">
+    <title>500 - Server Error | SafetyCheck Pro™</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #003d6b;
+            --navy-dark: #001f3d;
+            --green: #4CAF50;
+            --green-light: #6FCF73;
+            --green-dark: #388E3C;
+            --orange: #FF9800;
+            --orange-light: #FFB74D;
+            --orange-dark: #F57C00;
+            --red: #f44336;
+            --gray-900: #0f172a;
+            --gray-800: #1e293b;
+            --gray-700: #334155;
+            --gray-600: #475569;
+            --gray-500: #64748b;
+            --gray-400: #94a3b8;
+            --gray-300: #cbd5e1;
+            --gray-200: #e2e8f0;
+            --gray-100: #f1f5f9;
+            --gray-50: #f8fafc;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #003d6b 0%, #00264d 100%);
+            --gradient-orange: linear-gradient(135deg, #FF9800 0%, #FFB74D 100%);
+            --gradient-mesh: radial-gradient(at 40% 20%, hsla(208, 100%, 20%, 0.3) 0px, transparent 50%),
+                            radial-gradient(at 80% 0%, hsla(38, 100%, 50%, 0.2) 0px, transparent 50%),
+                            radial-gradient(at 0% 50%, hsla(208, 100%, 30%, 0.2) 0px, transparent 50%),
+                            radial-gradient(at 80% 50%, hsla(38, 100%, 40%, 0.15) 0px, transparent 50%),
+                            radial-gradient(at 0% 100%, hsla(208, 100%, 20%, 0.2) 0px, transparent 50%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gradient-mesh), var(--gray-50);
+            color: var(--gray-900);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .error-container {
+            animation: fadeInUp 0.8s ease-out;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Warning Icon Container */
+        .warning-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 2rem;
+            position: relative;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Warning Triangle */
+        .warning-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+            position: relative;
+            animation: warningPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes warningPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .warning-triangle {
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 104px solid var(--orange);
+            position: relative;
+            filter: drop-shadow(0 10px 30px rgba(255, 152, 0, 0.3));
+        }
+
+        .warning-triangle::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 48px solid transparent;
+            border-right: 48px solid transparent;
+            border-bottom: 83px solid white;
+            top: 12px;
+            left: -48px;
+        }
+
+        /* Exclamation Mark */
+        .exclamation {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--orange);
+            animation: exclamationBlink 2s ease-in-out infinite;
+        }
+
+        @keyframes exclamationBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Gear Icons (Broken) */
+        .gear {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 8px solid var(--gray-300);
+            border-radius: 50%;
+            animation: gearRotate 4s linear infinite;
+        }
+
+        .gear::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--gray-300);
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .gear::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--gray-300);
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .gear-1 {
+            top: 20px;
+            left: -10px;
+            animation-direction: normal;
+        }
+
+        .gear-2 {
+            top: 20px;
+            right: -10px;
+            animation-direction: reverse;
+            animation-duration: 3s;
+        }
+
+        @keyframes gearRotate {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(90deg); }
+            26% { transform: rotate(85deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Error Code */
+        .error-code {
+            font-family: 'Sora', sans-serif;
+            font-size: 6rem;
+            font-weight: 800;
+            color: var(--orange);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(255, 152, 0, 0.2);
+            animation: scaleIn 0.5s ease-out 0.5s both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Error Title */
+        .error-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out 0.7s both;
+        }
+
+        /* Error Message */
+        .error-message {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease-out 0.9s both;
+        }
+
+        /* Status Box */
+        .status-box {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0, 61, 107, 0.1);
+            animation: fadeInUp 0.8s ease-out 1.1s both;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .status-item:last-child {
+            border-bottom: none;
+        }
+
+        .status-label {
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        .status-value {
+            color: var(--gray-900);
+            font-family: 'Sora', sans-serif;
+            font-weight: 600;
+        }
+
+        .status-value.error {
+            color: var(--orange);
+        }
+
+        /* Button Container */
+        .button-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+            animation: fadeInUp 0.8s ease-out 1.3s both;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 500px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-orange);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 152, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 152, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--navy);
+            border: 2px solid var(--navy);
+            box-shadow: 0 5px 15px rgba(0, 61, 107, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: var(--navy);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 61, 107, 0.2);
+        }
+
+        /* Loading Spinner for Retry */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .btn-loading .spinner {
+            display: inline-block;
+        }
+
+        .btn-loading .btn-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Support Section */
+        .support-section {
+            background: var(--gray-50);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            animation: fadeInUp 0.8s ease-out 1.5s both;
+        }
+
+        .support-title {
+            font-family: 'Sora', sans-serif;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .support-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .support-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .support-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 61, 107, 0.1);
+        }
+
+        .support-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .support-method {
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.25rem;
+        }
+
+        .support-detail {
+            color: var(--green);
+            font-size: 0.9rem;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .support-detail:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .warning-container {
+                width: 120px;
+                height: 120px;
+            }
+
+            .warning-icon {
+                width: 100px;
+                height: 100px;
+            }
+
+            .warning-triangle {
+                border-left-width: 50px;
+                border-right-width: 50px;
+                border-bottom-width: 87px;
+            }
+
+            .warning-triangle::before {
+                border-left-width: 40px;
+                border-right-width: 40px;
+                border-bottom-width: 69px;
+                left: -40px;
+            }
+
+            .exclamation {
+                font-size: 2.5rem;
+                bottom: 20px;
+            }
+
+            .error-code {
+                font-size: 4rem;
+            }
+
+            .error-title {
+                font-size: 1.5rem;
+            }
+
+            .error-message {
+                font-size: 1rem;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .status-box,
+            .support-section {
+                padding: 1.5rem;
+            }
+
+            .support-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <!-- Warning Icon with Gears -->
+        <div class="warning-container">
+            <div class="gear gear-1"></div>
+            <div class="gear gear-2"></div>
+            <div class="warning-icon">
+                <div class="warning-triangle"></div>
+                <div class="exclamation">!</div>
+            </div>
+        </div>
+
+        <!-- Error Content -->
+        <h1 class="error-code">500</h1>
+        <h2 class="error-title">Server Error</h2>
+        <p class="error-message">
+            Something went wrong on our end. Don't worry, our team has been notified and we're working to fix this as quickly as possible.
+        </p>
+
+        <!-- Status Information -->
+        <div class="status-box">
+            <div class="status-item">
+                <span class="status-label">Error ID:</span>
+                <span class="status-value error" id="errorId">ERR_2025_092001</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Timestamp:</span>
+                <span class="status-value" id="timestamp">Loading...</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Status:</span>
+                <span class="status-value">Service Temporarily Unavailable</span>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button-container">
+            <button onclick="retryRequest()" class="btn btn-primary" id="retryBtn">
+                <span class="btn-text">↻ Try Again</span>
+                <span class="spinner"></span>
+            </button>
+            <a href="/" class="btn btn-secondary">
+                ← Back to Home
+            </a>
+        </div>
+
+        <!-- Support Section -->
+        <div class="support-section">
+            <h3 class="support-title">Need Immediate Assistance?</h3>
+            <div class="support-options">
+                <div class="support-card">
+                    <div class="support-icon">📧</div>
+                    <div class="support-method">Email Support</div>
+                    <a href="mailto:support@safetycheckpro.com" class="support-detail">
+                        support@safetycheckpro.com
+                    </a>
+                </div>
+                <div class="support-card">
+                    <div class="support-icon">📞</div>
+                    <div class="support-method">Phone Support</div>
+                    <a href="tel:1-800-SAFETY-1" class="support-detail">
+                        1-800-SAFETY-1
+                    </a>
+                </div>
+                <div class="support-card">
+                    <div class="support-icon">🔄</div>
+                    <div class="support-method">System Status</div>
+                    <a href="https://status.safetycheckpro.com" target="_blank" class="support-detail">
+                        status.safetycheckpro.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate error ID based on timestamp
+        function generateErrorId() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+            return `ERR_${year}${month}${day}_${random}`;
+        }
+
+        // Format timestamp
+        function updateTimestamp() {
+            const now = new Date();
+            const options = {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                timeZoneName: 'short'
+            };
+            document.getElementById('timestamp').textContent = now.toLocaleString('en-US', options);
+        }
+
+        // Retry functionality
+        function retryRequest() {
+            const btn = document.getElementById('retryBtn');
+            btn.classList.add('btn-loading');
+            
+            // Simulate retry request
+            setTimeout(() => {
+                // In production, this would retry the original request
+                // For now, we'll reload the page or redirect
+                
+                // Check if we have a referrer to go back to
+                if (document.referrer && document.referrer.includes(window.location.hostname)) {
+                    window.location.href = document.referrer;
+                } else {
+                    // Otherwise, try reloading
+                    window.location.reload();
+                }
+            }, 2000);
+        }
+
+        // Log error for monitoring
+        function logServerError() {
+            const errorData = {
+                errorId: document.getElementById('errorId').textContent,
+                url: window.location.href,
+                referrer: document.referrer,
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                // In production, include stack trace if available
+                stack: window.errorStack || 'No stack trace available'
+            };
+
+            console.error('500 Server Error:', errorData);
+            
+            // In production, send to error tracking service
+            // fetch('/api/log-500', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(errorData)
+            // }).catch(err => {
+            //     // Silently fail if logging fails
+            //     console.error('Failed to log error:', err);
+            // });
+        }
+
+        // Check if this is a recurring error
+        function checkErrorFrequency() {
+            const errorCount = parseInt(sessionStorage.getItem('error500Count') || '0');
+            const lastError = sessionStorage.getItem('lastError500Time');
+            const now = Date.now();
+            
+            if (lastError) {
+                const timeSinceLastError = now - parseInt(lastError);
+                // If less than 5 minutes since last error
+                if (timeSinceLastError < 300000) {
+                    sessionStorage.setItem('error500Count', (errorCount + 1).toString());
+                    
+                    // If more than 3 errors in 5 minutes, show additional help
+                    if (errorCount >= 2) {
+                        const message = document.querySelector('.error-message');
+                        message.innerHTML += '<br><br><strong>We\'re experiencing higher than normal errors. Our team is actively working on a resolution.</strong>';
+                    }
+                } else {
+                    // Reset counter if more than 5 minutes
+                    sessionStorage.setItem('error500Count', '1');
+                }
+            } else {
+                sessionStorage.setItem('error500Count', '1');
+            }
+            
+            sessionStorage.setItem('lastError500Time', now.toString());
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set error ID
+            document.getElementById('errorId').textContent = generateErrorId();
+            
+            // Update timestamp
+            updateTimestamp();
+            
+            // Log error
+            logServerError();
+            
+            // Check error frequency
+            checkErrorFrequency();
+        });
+
+        // Capture any uncaught errors on this page
+        window.addEventListener('error', function(event) {
+            console.error('Additional error on 500 page:', event.error);
+            // Could send this to monitoring as well
+        });
+    </script>
+</body>
+</html>
+
+<!-- 
+==============================================================
+BACKEND INTEGRATION NOTES FOR 500 ERROR PAGE
+==============================================================
+
+ERROR HANDLING REQUIREMENTS:
+- Generate unique error ID for each 500 error
+- Log full error details including stack trace
+- Send alerts for critical errors or high error rates
+- Track error patterns and frequencies
+
+RECOMMENDED ERROR DATA TO LOG:
+{
+    errorId: "ERR_20250920_1234",
+    timestamp: "2025-09-20T10:30:00Z",
+    url: "/api/endpoint",
+    method: "POST",
+    statusCode: 500,
+    errorMessage: "Database connection failed",
+    stackTrace: "...",
+    userId: "user123" (if authenticated),
+    sessionId: "session456",
+    requestBody: {...},
+    serverInfo: {
+        hostname: "server01",
+        version: "1.2.3"
+    }
+}
+
+BACKEND ENDPOINTS:
+POST /api/log-500
+- Records 500 errors for monitoring
+- Should be resilient (don't fail if logging fails)
+- Consider using a separate error logging service
+
+GET /api/retry/{requestId}
+- Retry the original failed request if possible
+- Check if the issue has been resolved
+- Return success or failure status
+
+ERROR RECOVERY STRATEGIES:
+1. Automatic retry with exponential backoff
+2. Circuit breaker pattern for failing services
+3. Graceful degradation (show cached data if available)
+4. Queue requests for later processing if possible
+
+MONITORING ALERTS:
+- Alert if error rate > 1% of requests
+- Alert if specific endpoint fails > 5 times in 1 minute
+- Page operations team for database connection errors
+- Track error resolution time
+
+USER SESSION PRESERVATION:
+- Maintain user session even after 500 error
+- Store form data in localStorage before submission
+- Restore user context after error recovery
+
+SUGGESTED ERROR CATEGORIES:
+- Database errors (connection, query failures)
+- External API failures
+- File system errors
+- Memory/resource exhaustion
+- Configuration errors
+- Timeout errors
+
+Each category could have different recovery strategies
+
+============================================================== 
+-->
