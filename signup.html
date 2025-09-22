@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign up for SafetyCheck Pro™ - Start monitoring your fleet's DOT inspections in under 5 minutes.">
+    <title>Sign Up - SafetyCheck Pro™ - Start Your Fleet Monitoring</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #003d6b;
+            --navy-dark: #001f3d;
+            --green: #4CAF50;
+            --green-light: #6FCF73;
+            --green-dark: #388E3C;
+            --orange: #FF9800;
+            --red: #f44336;
+            --gray-900: #0f172a;
+            --gray-800: #1e293b;
+            --gray-700: #334155;
+            --gray-600: #475569;
+            --gray-500: #64748b;
+            --gray-400: #94a3b8;
+            --gray-300: #cbd5e1;
+            --gray-200: #e2e8f0;
+            --gray-100: #f1f5f9;
+            --gray-50: #f8fafc;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #003d6b 0%, #00264d 100%);
+            --gradient-green: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .signup-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 61, 107, 0.15);
+            overflow: hidden;
+            width: 100%;
+            max-width: 1100px;
+            margin: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 700px;
+            border: 1px solid var(--gray-100);
+        }
+
+        /* Left Side - Form */
+        .signup-left {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: white;
+        }
+
+        .signup-header {
+            margin-bottom: 2rem;
+        }
+
+        .progress-steps {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            flex: 1;
+            height: 4px;
+            background: var(--gray-200);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .step.active {
+            background: var(--gradient-green);
+        }
+
+        .signup-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            padding: 0.375rem 1rem;
+            border-radius: 500px;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .signup-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .signup-subtitle {
+            color: var(--gray-600);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .value-box {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.05) 0%, rgba(76, 175, 80, 0.02) 100%);
+            border-left: 3px solid var(--green);
+            padding: 0.75rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+
+        .value-text {
+            font-size: 0.875rem;
+            color: var(--green-dark);
+            font-weight: 600;
+        }
+
+        /* Form Styles */
+        .signup-form {
+            width: 100%;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .required {
+            color: var(--red);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .input-help {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            margin-top: 0.25rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .checkbox-input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--green);
+            margin-top: 2px;
+            cursor: pointer;
+        }
+
+        .checkbox-label {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        .checkbox-label a {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+
+        .legal-notice {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            margin: 1rem 0;
+            line-height: 1.5;
+        }
+
+        /* Submit Button */
+        .submit-button {
+            width: 100%;
+            background: var(--gradient-green);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 500px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.4);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .login-link {
+            text-align: center;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+        }
+
+        .login-link a {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Right Side - Benefits */
+        .signup-right {
+            background: var(--gradient-primary);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-section {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 2rem;
+        }
+
+        .logo-mark {
+            width: 45px;
+            height: 45px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Radar rings */
+        .radar-ring {
+            position: absolute;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+
+        .radar-ring:nth-child(1) {
+            width: 45px;
+            height: 45px;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .radar-ring:nth-child(2) {
+            width: 30px;
+            height: 30px;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .radar-ring:nth-child(3) {
+            width: 15px;
+            height: 15px;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Center dot */
+        .radar-center {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .logo-text-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text {
+            font-family: 'Sora', sans-serif;
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: white;
+            display: flex;
+        }
+
+        .logo-safety { color: white; }
+        .logo-check { color: var(--green-light); }
+        .logo-pro { color: white; }
+
+        .logo-tagline {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 2px;
+        }
+
+        .benefits-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .benefits-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .benefits-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .benefits-list {
+            list-style: none;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .benefit-icon {
+            width: 20px;
+            height: 20px;
+            background: rgba(76, 175, 80, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .testimonial {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .testimonial-text {
+            color: white;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .signup-container {
+                grid-template-columns: 1fr;
+                margin: 1rem;
+                max-width: 450px;
+            }
+            
+            .signup-right {
+                display: none;
+            }
+            
+            .signup-left {
+                padding: 2rem;
+            }
+            
+            .signup-title {
+                font-size: 1.75rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav style="background: white; box-shadow: 0 2px 10px rgba(0, 61, 107, 0.1); position: fixed; top: 0; left: 0; right: 0; z-index: 1000;">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" style="display: flex; align-items: center; gap: 0.4rem; text-decoration: none;">
+                <div style="width: 45px; height: 45px; position: relative; display: flex; align-items: center; justify-content: center;">
+                    <div style="position: absolute; width: 45px; height: 45px; border: 2px solid rgba(76, 175, 80, 0.2); border-radius: 50%;"></div>
+                    <div style="position: absolute; width: 30px; height: 30px; border: 2px solid rgba(76, 175, 80, 0.4); border-radius: 50%;"></div>
+                    <div style="position: absolute; width: 15px; height: 15px; border: 2px solid rgba(76, 175, 80, 0.6); border-radius: 50%;"></div>
+                    <div style="width: 8px; height: 8px; background: #003d6b; border-radius: 50%; position: relative; z-index: 10;"></div>
+                </div>
+                <div>
+                    <div style="font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.6rem;">
+                        <span style="color: #003d6b;">Safety</span><span style="color: #4CAF50;">Check</span><span style="color: #003d6b;">Pro</span>
+                    </div>
+                    <div style="font-size: 0.65rem; color: #475569; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px;">POWERED BY JENKEN SAFETY SERVICES</div>
+                </div>
+            </a>
+            <div style="display: flex; gap: 2rem; align-items: center;">
+                <a href="index.html" style="color: #475569; text-decoration: none; font-weight: 500;">Home</a>
+                <a href="demo.html" style="color: #475569; text-decoration: none; font-weight: 500;">Demo</a>
+                <a href="faq.html" style="color: #475569; text-decoration: none; font-weight: 500;">FAQ</a>
+                <a href="pricing.html" style="color: #475569; text-decoration: none; font-weight: 500;">Pricing</a>
+                <a href="contact.html" style="color: #475569; text-decoration: none; font-weight: 500;">Contact</a>
+                <a href="login.html" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: #003d6b; color: white; border-radius: 500px; text-decoration: none; font-weight: 500;">
+                    🔒 Login
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="signup-container" style="margin-top: 100px;">
+        <!-- Left Side - Signup Form -->
+        <div class="signup-left">
+            <div class="signup-header">
+                <div class="progress-steps">
+                    <div class="step active"></div>
+                    <div class="step"></div>
+                    <div class="step"></div>
+                </div>
+                
+                <div class="signup-badge">
+                    <div class="badge-dot"></div>
+                    <span style="color: var(--green-dark); font-size: 0.875rem; font-weight: 600;">Step 1 of 3: Account Setup</span>
+                </div>
+                
+                <h1 class="signup-title">Start Your Account</h1>
+                <p class="signup-subtitle">Join thousands of fleets monitoring compliance daily</p>
+                
+                <div class="value-box">
+                    <p class="value-text">🎉 Special pricing for fleets under 50 drivers - No credit card required to start</p>
+                </div>
+            </div>
+
+            <form class="signup-form" id="signupForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName" class="form-label">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName" class="form-label">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="email" class="form-label">Work Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="you@company.com" required>
+                    <p class="input-help">We'll send your login credentials and alerts to this address</p>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="phone" class="form-label">Mobile Phone <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" class="form-input" placeholder="(555) 123-4567" required>
+                    <p class="input-help">For text inspection alerts (optional)</p>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="company" class="form-label">Company Name <span class="required">*</span></label>
+                    <input type="text" id="company" name="company" class="form-input" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dot" class="form-label">Primary DOT Number <span class="required">*</span></label>
+                        <input type="text" id="dot" name="dot" class="form-input" placeholder="1234567" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fleetSize" class="form-label">Fleet Size <span class="required">*</span></label>
+                        <select id="fleetSize" name="fleetSize" class="form-select" required>
+                            <option value="">Select fleet size</option>
+                            <option value="1-10">1-10 drivers</option>
+                            <option value="11-25">11-25 drivers</option>
+                            <option value="26-50">26-50 drivers</option>
+                            <option value="51-100">51-100 drivers</option>
+                            <option value="101-200">101-200 drivers</option>
+                            <option value="200+">200+ drivers</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="password" class="form-label">Create Password <span class="required">*</span></label>
+                    <input type="password" id="password" name="password" class="form-input" required>
+                    <p class="input-help">Minimum 8 characters with at least one number</p>
+                </div>
+
+                <div class="legal-notice">
+                    <strong>Important Notice:</strong> By providing your mobile phone number, you consent to receive text message alerts from SafetyCheck Pro™ regarding DOT inspection notifications. Message and data rates may apply. Text frequency varies based on inspection activity. Reply STOP to cancel at any time. For help, text HELP or contact support@safetycheckpro.com.
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" class="checkbox-input" required>
+                    <label for="terms" class="checkbox-label">
+                        I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>. 
+                        I understand that SafetyCheck Pro™ will monitor public FMCSA data for my fleet.
+                    </label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="marketing" name="marketing" class="checkbox-input">
+                    <label for="marketing" class="checkbox-label">
+                        Send me tips and best practices for improving fleet compliance (you can unsubscribe anytime)
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-button">Create Account</button>
+
+                <div class="login-link">
+                    Already have an account? <a href="/login">Sign in here</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Right Side - Benefits -->
+        <div class="signup-right">
+            <div class="logo-section">
+                <div class="logo-container">
+                    <div class="logo-mark">
+                        <div class="radar-ring"></div>
+                        <div class="radar-ring"></div>
+                        <div class="radar-ring"></div>
+                        <div class="radar-center"></div>
+                    </div>
+                    <div class="logo-text-container">
+                        <div class="logo-text">
+                            <span class="logo-safety">Safety</span><span class="logo-check">Check</span><span class="logo-pro">Pro</span>
+                        </div>
+                        <div class="logo-tagline">POWERED BY JENKEN SAFETY SERVICES</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="benefits-content">
+                <h2 class="benefits-title">Get Started in Minutes</h2>
+                <p class="benefits-description">
+                    No FMCSA portal credentials needed. Just your DOT number and we'll 
+                    start monitoring daily.
+                </p>
+                
+                <ul class="benefits-list">
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✔</div>
+                        Setup takes less than 5 minutes
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✔</div>
+                        Daily FMCSA data monitoring
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✔</div>
+                        Email and text notifications
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✔</div>
+                        No contracts or cancellation fees
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">✔</div>
+                        Track all inspection levels
+                    </li>
+                </ul>
+
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "SafetyCheck Pro saved us from a major compliance issue. We got an alert about an out-of-service 
+                        order and were able to dispatch a replacement driver immediately."
+                    </p>
+                    <p class="testimonial-author">
+                        — Mike Thompson, Fleet Manager at Regional Express
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form validation and submission
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const button = this.querySelector('.submit-button');
+            const originalText = button.textContent;
+            
+            // Validate password
+            const password = document.getElementById('password').value;
+            if (password.length < 8 || !/\d/.test(password)) {
+                alert('Password must be at least 8 characters and contain at least one number.');
+                return;
+            }
+            
+            // Validate DOT number (7-8 digits)
+            const dot = document.getElementById('dot').value;
+            const dotDigits = dot.replace(/\D/g, '');
+            if (dotDigits.length < 7 || dotDigits.length > 8) {
+                alert('Please enter a valid 7-8 digit DOT number.');
+                return;
+            }
+            
+            button.textContent = 'Creating Account...';
+            button.disabled = true;
+            
+            // Simulate account creation
+            setTimeout(() => {
+                // Update progress steps
+                document.querySelectorAll('.step')[1].classList.add('active');
+                
+                alert('Account created successfully! Check your email for next steps.');
+                
+                // Reset button
+                button.textContent = originalText;
+                button.disabled = false;
+                
+                // Reset form
+                this.reset();
+                
+                // Optionally redirect to login page after a delay
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+            }, 2000);
+        });
+
+        // Format phone number
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 6) {
+                value = `(${value.slice(0,3)}) ${value.slice(3,6)}-${value.slice(6,10)}`;
+            } else if (value.length >= 3) {
+                value = `(${value.slice(0,3)}) ${value.slice(3)}`;
+            }
+            e.target.value = value;
+        });
+
+        // Add input focus effects
+        document.querySelectorAll('.form-input, .form-select').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('focused');
+            });
+        });
+
+        // Real-time validation feedback
+        document.getElementById('email').addEventListener('blur', function() {
+            if (!this.value.includes('@') || !this.value.includes('.')) {
+                this.style.borderColor = 'var(--red)';
+            } else {
+                this.style.borderColor = '';
+            }
+        });
+
+        document.getElementById('password').addEventListener('input', function() {
+            const value = this.value;
+            const hasMinLength = value.length >= 8;
+            const hasNumber = /\d/.test(value);
+            
+            if (hasMinLength && hasNumber) {
+                this.style.borderColor = 'var(--green)';
+            } else {
+                this.style.borderColor = '';
+            }
+        });
+    </script>
+</body>
+</html>
