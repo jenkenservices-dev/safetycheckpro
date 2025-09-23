@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - SafetyCheck Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #003d6b;
+            --green: #4CAF50;
+            --orange: #FF9800;
+            --red: #f44336;
+            --white: #ffffff;
+            --gray-600: #475569;
+            --gray-500: #64748b;
+            --gray-400: #94a3b8;
+            --gray-300: #cbd5e1;
+            --gray-200: #e2e8f0;
+            --gray-100: #f1f5f9;
+            --gray-50: #f8fafc;
+            --gradient-primary: linear-gradient(135deg, #003d6b 0%, #00264d 100%);
+            --gradient-green: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gradient-primary);
+            color: var(--navy);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 61, 107, 0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: none;
+        }
+
+        .logo-mark {
+            position: relative;
+            width: 45px;
+            height: 45px;
+        }
+
+        .radar-ring {
+            position: absolute;
+            border: 2px solid var(--green);
+            border-radius: 50%;
+            opacity: 0;
+            animation: radarPulse 3s infinite;
+        }
+
+        .radar-ring:nth-child(1) {
+            width: 100%;
+            height: 100%;
+            animation-delay: 0s;
+        }
+
+        .radar-ring:nth-child(2) {
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            animation-delay: 0.5s;
+        }
+
+        .radar-ring:nth-child(3) {
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+            animation-delay: 1s;
+        }
+
+        @keyframes radarPulse {
+            0% { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        .radar-center {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--navy);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .logo-safety {
+            color: var(--navy);
+        }
+
+        .logo-check {
+            color: var(--green);
+        }
+
+        .logo-pro {
+            color: var(--navy);
+        }
+
+        .logo-powered {
+            font-size: 0.65rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--green);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-left: 2rem;
+            border-left: 1px solid var(--gray-100);
+        }
+
+        /* Main Content */
+        .page-wrapper {
+            background: var(--gray-100);
+            min-height: calc(100vh - 70px);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 61, 107, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title-section {
+            flex: 1;
+        }
+
+        .page-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+        }
+
+        /* Action Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 500px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-green);
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(76, 175, 80, 0.4);
+        }
+
+        /* Tabs */
+        .tabs-container {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 61, 107, 0.1);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 2px solid var(--gray-100);
+            padding-bottom: 1rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            color: var(--gray-600);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab:hover {
+            color: var(--navy);
+        }
+
+        .tab.active {
+            color: var(--green);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--green);
+        }
+
+        /* Users Table */
+        .users-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 61, 107, 0.1);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-input {
+            padding: 0.5rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 500px;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f8fafc;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: var(--navy);
+        }
+
+        tr:hover td {
+            background: #f8fafc;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .user-email {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 500px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-success {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--green);
+        }
+
+        .badge-warning {
+            background: rgba(255, 152, 0, 0.1);
+            color: var(--orange);
+        }
+
+        .badge-info {
+            background: rgba(0, 61, 107, 0.1);
+            color: var(--navy);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 24px;
+            background: #e2e8f0;
+            border-radius: 500px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: var(--green);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--white);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .toggle-switch.active::after {
+            left: 26px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-icon {
+            padding: 0.5rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            background: var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--gray-600);
+        }
+
+        .btn-icon:hover {
+            border-color: var(--green);
+            color: var(--green);
+            background: rgba(76, 175, 80, 0.05);
+        }
+
+        .btn-icon.danger:hover {
+            border-color: var(--red);
+            color: var(--red);
+            background: rgba(244, 67, 54, 0.05);
+        }
+
+        /* Chat Bubble */
+        .chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .chat-button {
+            width: 280px;
+            height: 70px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            border-radius: 35px;
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chat-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-50%) translateY(-50%); }
+            50% { transform: translateX(50%) translateY(-50%); }
+        }
+
+        .chat-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(76, 175, 80, 0.4);
+        }
+
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--green);
+            font-size: 18px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .chat-avatar .online-dot {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 12px;
+            height: 12px;
+            background: #4CAF50;
+            border: 2px solid white;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .chat-text {
+            margin-left: 15px;
+            color: white;
+            flex: 1;
+        }
+
+        .chat-greeting {
+            font-size: 13px;
+            opacity: 0.95;
+            margin-bottom: 2px;
+        }
+
+        .chat-cta {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .page-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+            
+            .chat-button {
+                width: 60px;
+                height: 60px;
+                border-radius: 30px;
+                padding: 0;
+                justify-content: center;
+            }
+            
+            .chat-text {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="logo-container">
+                <div class="logo-mark">
+                    <div class="radar-ring"></div>
+                    <div class="radar-ring"></div>
+                    <div class="radar-ring"></div>
+                    <div class="radar-center"></div>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-main">
+                        <span class="logo-safety">Safety</span><span class="logo-check">Check</span><span class="logo-pro">Pro</span>
+                    </div>
+                    <span class="logo-powered">Powered by Jenken Safety Services</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="../dashboard/dashboard.html">Dashboard</a>
+                <a href="../dashboard/inspections.html">Inspections</a>
+                <a href="fleet-info.html">Fleet Analytics</a>
+                <a href="user-management.html" class="active">Users</a>
+                <a href="help.html">Help</a>
+                <div class="user-menu">
+                    <span style="color: var(--gray-600);">John Doe</span>
+                    <a href="../auth/login.html" style="color: var(--red);">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="page-wrapper">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-title-section">
+                    <h1 class="page-title">User Management</h1>
+                    <p class="page-subtitle">Manage team members and alert recipients</p>
+                </div>
+                <button class="btn btn-primary" onclick="openAddUserModal()">
+                    <span>+</span> Add New User
+                </button>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('users')">Team Members</button>
+                    <button class="tab" onclick="switchTab('alerts')">Alert Preferences</button>
+                    <button class="tab" onclick="switchTab('roles')">Roles & Permissions</button>
+                </div>
+            </div>
+
+            <!-- Users Table -->
+            <div id="users-content" class="users-card">
+                <div class="card-header">
+                    <div class="search-box">
+                        <input type="text" class="search-input" placeholder="Search users...">
+                        <span style="color: var(--gray-600);">Showing 6 users</span>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Role</th>
+                                <th>Alert Methods</th>
+                                <th>Status</th>
+                                <th>Last Active</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="user-info">
+                                        <div class="user-avatar">JD</div>
+                                        <div class="user-details">
+                                            <span class="user-name">John Doe</span>
+                                            <span class="user-email">john.doe@company.com</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-info">Admin</span></td>
+                                <td>Email, SMS</td>
+                                <td>
+                                    <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                                </td>
+                                <td>2 hours ago</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon" title="Edit">✏️</button>
+                                        <button class="btn-icon danger" title="Delete">🗑️</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-info">
+                                        <div class="user-avatar">JS</div>
+                                        <div class="user-details">
+                                            <span class="user-name">Jane Smith</span>
+                                            <span class="user-email">jane.smith@company.com</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-success">Manager</span></td>
+                                <td>Email</td>
+                                <td>
+                                    <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                                </td>
+                                <td>Yesterday</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon" title="Edit">✏️</button>
+                                        <button class="btn-icon danger" title="Delete">🗑️</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-info">
+                                        <div class="user-avatar">RJ</div>
+                                        <div class="user-details">
+                                            <span class="user-name">Robert Johnson</span>
+                                            <span class="user-email">robert.j@company.com</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-warning">Dispatcher</span></td>
+                                <td>SMS</td>
+                                <td>
+                                    <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                                </td>
+                                <td>3 days ago</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon" title="Edit">✏️</button>
+                                        <button class="btn-icon danger" title="Delete">🗑️</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mike Thompson Chatbot Widget -->
+    <div class="chat-widget">
+        <button class="chat-button" onclick="toggleChat()">
+            <div class="chat-avatar">
+                MT
+                <span class="online-dot"></span>
+            </div>
+            <div class="chat-text">
+                <div class="chat-greeting">Hi there! 👋</div>
+                <div class="chat-cta">Need help?</div>
+            </div>
+        </button>
+    </div>
+
+    <script>
+        function toggleSwitch(element) {
+            element.classList.toggle('active');
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            // Tab content switching logic would go here
+        }
+
+        function openAddUserModal() {
+            alert('Add User modal would open here');
+        }
+
+        function toggleChat() {
+            alert('Chat window would open here');
+        }
+    </script>
+</body>
+</html>
